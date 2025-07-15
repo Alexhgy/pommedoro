@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #FF746C;
+    --primary-dark: #FF2F23;
+    --secondary: antiquewhite;
+    --white-shade: whitesmoke;
+    --shadow-dark: rgba(0,0,0,0.5);
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+header {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+    text-align: center;
+    color: whitesmoke;
+}
+
+header h2 {
+    font-weight: 700;
+    font-size: 1.5rem; /* 24px */
+}
+
+main {
+    background-color: var(--secondary);
+    padding: 30px;
+    height: 100vh;
+}
+
+main .temporizador {
+    background-color: var(--white-shade);
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden
+}
+
+main .temporizador .barra {
+    height: 10px;
+    background: var(--primary);
+}
+
+main .temporizador .numeros {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 10px 0;
+}
+
+main .temporizador .numeros .minutos {
+    font-size: 5rem;
+}
+
+main .temporizador .numeros .segundos {
+    font-size: 3rem;
+}
+
+main .temporizador .numeros .divisor-numeros {
+    color: rgba(0,0,0,0.3)
+}
+
+main .temporizador .acciones {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+main .temporizador .acciones button{
+    width: 100%;
+    min-height: 30px;
+    background-color: var(--primary);
+    border: none;
+    color: whitesmoke;
+    text-align: center;
+    cursor: pointer;
+    transition: all ease 0.2s;
+
+    &:first-child {
+         border-bottom-left-radius: 10px; 
+         border-right: 1px solid var(--white-shade);
+    }
+    &:last-child {
+        border-bottom-right-radius: 10px;
+        border-left: 1px solid var(--white-shade);
+    }
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+}
+main .temporizador .acciones button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.parpadeo {
+    animation: blink 1s step-start infinite
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
