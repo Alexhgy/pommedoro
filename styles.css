@@ -142,7 +142,7 @@ main .temporizador {
     border-radius: 10px;
     text-align: center;
     overflow: hidden;
-    box-shadow: 10px 10px 2px var(--shadow-dark);
+    box-shadow: 7px 7px 7px var(--shadow-dark);
 }
 
 main .temporizador .barra {
@@ -221,7 +221,7 @@ main .temporizador .acciones button span {
     margin-top: 40px;
     width: 100%;
     border-radius: 10px;
-    box-shadow: 10px 10px 2px var(--shadow-dark);
+    box-shadow: 7px 7px 7px var(--shadow-dark);
 }
 
 .cambiar-temporizador h2 {
@@ -241,12 +241,19 @@ main .temporizador .acciones button span {
     padding: 20px;
 }
 
+.cambiar-temporizador label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .cambiar-temporizador input {
     margin: 5px 0 20px 0;
     border: none;
     border-radius: 5px;
     min-height: 30px;
     text-align: center;
+    box-shadow: 1px 1px 1px var(--shadow-dark);
     &:focus {
         outline: none;
         border: 2px solid var(--primary-dark);
@@ -262,6 +269,18 @@ main .temporizador .acciones button span {
     &:hover {
         background-color: var(--primary-dark);
     }
+}
+
+.error-input {
+    border: 2px solid var(--primary-dark);
+}
+
+.error {
+    color: var(--primary-dark)
+}
+
+.ocultar.error {
+    display: none;
 }
 
 @media screen and (max-width: 500px){

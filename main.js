@@ -1,18 +1,44 @@
+// botones temporizador
 const barra = document.querySelector(".barra");
 const elementoMinutos = document.querySelector(".minutos");
 const elementoSegundos = document.querySelector(".segundos");
+// elementos guia
+const cuadroGuia = document.querySelector(".guia-uso");
+// elementos modificar
+const inputDuracionTemp = document.querySelector("#inputMinutos");
+const inputDuracionDesc = document.querySelector("#inputMinutosDescanso");
+const inputDescansoLargo = document.querySelector("#inputMinutosDescansoLargo");
+const inputCiclos = document.querySelector("#inputCiclos");
+// iconos modificar
+const iconoErrorTempo = document.querySelector(".inpTemSpan");
+const iconoErrorDescanso = document.querySelector(".inpCicSpan");
+const iconoErrorDesLargo = document.querySelector(".inpDesLarSpan");
+const iconoErrorCiclo = document.querySelector(".inpTemSpan");
+// botones temporizador
 const botonIniciar = document.querySelector(".iniciar");
 const botonPausar = document.querySelector(".pausar");
 const botonDetener = document.querySelector(".detener");
+// botones guia
 const botonGuia = document.querySelector(".boton-guia");
-const cuadroGuia = document.querySelector(".guia-uso");
 const botonCerrarGuia = document.querySelector(".cerrar-guia");
+// botones modificar
+const botonAplicar = document.querySelector(".confirmar-cambios");
 
-let numeroMinutos = parseInt(document.querySelector(".minutos").innerText);
-let numeroSegundos = parseInt(document.querySelector(".segundos").innerText);
+let numeroMinutos = 0; // 25
+let numeroSegundos = 3; // dev
 
-let numMinDescanso = 0; // tiene que recuperar el valor del frontend
-let numSegDescanso = 5; // tiene que recuperar el valor del frontend
+elementoMinutos.innerText =
+  numeroMinutos < 10 ? "0" + numeroMinutos : numeroMinutos;
+elementoSegundos.innerText =
+  numeroSegundos < 10 ? "0" + numeroSegundos : numeroSegundos;
+
+let numMinDescanso = 0; // 5
+let numMinDescansoLargo = 0; // 15
+let numSegDescansoLargo = 2; // dev
+let numSegDescanso = 1; // dev
+
+let ciclosNecesarios = 3;
+let ciclosActuales = 0;
 
 duracion = numeroMinutos * 60 || numeroSegundos;
 tiempoRestante = duracion;
@@ -25,8 +51,8 @@ function actualizarTemporizador() {
   minutos = minutos < 10 ? "0" + minutos : minutos;
   segundos = segundos < 10 ? "0" + segundos : segundos;
 
-  elementoMinutos.textContent = minutos;
-  elementoSegundos.textContent = segundos;
+  elementoMinutos.innerText = minutos;
+  elementoSegundos.innerText = segundos;
 
   const porcentaje = (tiempoRestante / duracion) * 100;
   barra.style.width = porcentaje + "%";
@@ -34,15 +60,34 @@ function actualizarTemporizador() {
 
 function iniciarTemporizador() {
   if (intervalo !== null) return;
+
   intervalo = setInterval(() => {
     if (tiempoRestante <= 0) {
       if (duracion === numeroMinutos * 60 || duracion === numeroSegundos) {
-        duracion = numMinDescanso ? numMinDescanso * 60 : numSegDescanso;
+        ciclosActuales++;
+        console.log(
+          "ciclo actual: ",
+          ciclosActuales,
+          " ciclos necesarios: ",
+          ciclosNecesarios
+        );
+
+        if (ciclosActuales === ciclosNecesarios) {
+          ciclosActuales = 0;
+          duracion = numMinDescansoLargo
+            ? numMinDescansoLargo * 60
+            : numSegDescansoLargo;
+        } else {
+          duracion = numMinDescanso ? numMinDescanso * 60 : numSegDescanso;
+        }
+
         tiempoRestante = duracion;
         actualizarTemporizador();
       } else if (
         duracion === numMinDescanso * 60 ||
-        duracion === numSegDescanso
+        duracion === numSegDescanso ||
+        duracion === numMinDescansoLargo * 60 ||
+        duracion === numSegDescansoLargo
       ) {
         duracion = numeroMinutos ? numeroMinutos * 60 : numeroSegundos;
         tiempoRestante = duracion;
@@ -53,6 +98,7 @@ function iniciarTemporizador() {
       intervalo = null;
       return;
     }
+
     tiempoRestante--;
     actualizarTemporizador();
   }, 1000);
@@ -95,23 +141,46 @@ botonIniciar.addEventListener("click", () => {
   parpadearNumeros("remove");
 });
 
-botonPausar.addEventListener("click", () => {
-  pausarTemporizador();
-});
+botonPausar.addEventListener("click", () => pausarTemporizador());
 
-botonDetener.addEventListener("click", () => {
-  resetTemporizador();
-});
+botonDetener.addEventListener("click", () => resetTemporizador());
 
 botonGuia.addEventListener("click", () => {
   cuadroGuia.classList.add("mostrar");
 });
 
-// cerrar ventana al dar click fuera de ella -- PENDIENTE
+// cerrar cuadro de guia al dar click fuera de ella -- PENDIENTE
 // cuadroGuia.closest(".guia-uso.mostrar").addEventListener("click", () => {
 //   cuadroGuia.classList.remove("mostrar");
 // });
 
 botonCerrarGuia.addEventListener("click", () => {
   cuadroGuia.classList.remove("mostrar");
+});
+
+botonAplicar.addEventListener("click", () => {
+  numeroMinutos = inputDuracionTemp.value
+    ? parseInt(inputDuracionTemp.value)
+    : numeroMinutos;
+  numMinDescanso = inputDuracionDesc.value
+    ? parseInt(inputDuracionDesc.value)
+    : numMinDescanso;
+  ciclosNecesarios = inputCiclos.value
+    ? parseInt(inputCiclos.value)
+    : ciclosNecesarios;
+  numMinDescansoLargo = inputDescansoLargo.value
+    ? parseInt(inputDescansoLargo.value)
+    : numMinDescansoLargo;
+
+  console.log(
+    numeroMinutos,
+    numMinDescanso,
+    ciclosNecesarios,
+    numMinDescansoLargo
+  );
+
+  duracion = numeroMinutos * 60 || numeroSegundos;
+  tiempoRestante = duracion;
+
+  actualizarTemporizador();
 });
