@@ -107,7 +107,7 @@ botonGuia.addEventListener("click", () => {
   cuadroGuia.classList.add("mostrar");
 });
 
-// cerrar ventana al dar click fuera de ella
+// cerrar ventana al dar click fuera de ella -- PENDIENTE
 // cuadroGuia.closest(".guia-uso.mostrar").addEventListener("click", () => {
 //   cuadroGuia.classList.remove("mostrar");
 // });

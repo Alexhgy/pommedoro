@@ -15,7 +15,7 @@
     --secondary: antiquewhite;
     --white-shade: whitesmoke;
     --shadow-dark: rgba(0,0,0,0.5);
-    --fontSize: 16px
+    --fontSize: 16px;
 }
 
 html {
@@ -129,7 +129,7 @@ header nav span {
 main {
     background-color: var(--secondary);
     padding: 30px;
-    height: 100vh;
+    height: 100%;
 }
 
 main > section {
@@ -141,7 +141,8 @@ main .temporizador {
     background-color: var(--white-shade);
     border-radius: 10px;
     text-align: center;
-    overflow: hidden
+    overflow: hidden;
+    box-shadow: 10px 10px 2px var(--shadow-dark);
 }
 
 main .temporizador .barra {
@@ -219,6 +220,8 @@ main .temporizador .acciones button span {
 .cambiar-temporizador {
     margin-top: 40px;
     width: 100%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 2px var(--shadow-dark);
 }
 
 .cambiar-temporizador h2 {
