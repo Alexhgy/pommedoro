@@ -13,6 +13,7 @@
     --primary: #FF746C;
     --primary-dark: #FF2F23;
     --secondary: antiquewhite;
+    --confirm: #70BDB4;
     --white-shade: whitesmoke;
     --shadow-dark: rgba(0,0,0,0.5);
     --fontSize: 16px;
@@ -21,8 +22,15 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
     font-size: var(--fontSize);
+    height: 100%;
 }
 
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 header {
     width: 100%;
@@ -59,12 +67,38 @@ header nav span {
     cursor: pointer;
 }
 
+.modal.mostrar {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(30px) ;
+}
+
+.modal {
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--white-shade);
+    border-radius: 100%;
+    box-shadow: 3px 3px 1px var(--shadow-dark);
+    min-height: 80px;
+    min-width: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity ease 0.2s, visibility ease 0.2s, transform ease 0.2s;
+}
+
 .guia-uso.mostrar {
-    display: block;
+  opacity: 1;
+  visibility: visible;
+  height: 100%; /* altura máxima esperada */
+  overflow: hidden;
 }
 
 .guia-uso {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     background-color: var(--shadow-dark);
     min-width: 300px;
@@ -73,6 +107,7 @@ header nav span {
     padding: 50px;
     text-align: left;
     font-size: 1.3rem;   
+    transition: opacity ease 0.3s, visibility ease 0.3s;
 }
 
 .guia-uso .contenedor-guia {
@@ -110,7 +145,6 @@ header nav span {
 
 .guia-uso .cerrar-guia {
     padding: 10px;
-    font-weight: bold;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     &:hover {
@@ -129,6 +163,7 @@ header nav span {
 main {
     background-color: var(--secondary);
     padding: 30px;
+    width: 100%;
     height: 100%;
 }
 
@@ -271,12 +306,18 @@ main .temporizador .acciones button span {
     }
 }
 
-.error-input {
-    border: 2px solid var(--primary-dark);
+.error-modal {
+    color: var(--primary-dark);
+    border: 5px solid var(--primary-dark);
 }
 
-.error {
-    color: var(--primary-dark)
+.inputMinutos.error, .inputMinutosDescanso.error, .inputMinutosDescansoLargo.error {
+    border: 2px solid var(--primary-dark);
+} 
+
+.info {
+    color: var(--confirm);
+    border: 5px solid var(--confirm);
 }
 
 .ocultar.error {

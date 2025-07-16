@@ -24,18 +24,18 @@ const botonCerrarGuia = document.querySelector(".cerrar-guia");
 // botones modificar
 const botonAplicar = document.querySelector(".confirmar-cambios");
 
-let numeroMinutos = 0; // 25
-let numeroSegundos = 3; // dev
+let numeroMinutos = 25; // 25
+let numeroSegundos = 0; // dev
 
 elementoMinutos.innerText =
   numeroMinutos < 10 ? "0" + numeroMinutos : numeroMinutos;
 elementoSegundos.innerText =
   numeroSegundos < 10 ? "0" + numeroSegundos : numeroSegundos;
 
-let numMinDescanso = 0; // 5
-let numMinDescansoLargo = 0; // 15
-let numSegDescansoLargo = 2; // dev
-let numSegDescanso = 1; // dev
+let numMinDescanso = 5; // 5
+let numMinDescansoLargo = 15; // 15
+// let numSegDescansoLargo = 2; // dev
+// let numSegDescanso = 1; // dev
 
 let ciclosNecesarios = 3;
 let ciclosActuales = 0;
@@ -63,7 +63,7 @@ function iniciarTemporizador() {
 
   intervalo = setInterval(() => {
     if (tiempoRestante <= 0) {
-      if (duracion === numeroMinutos * 60 || duracion === numeroSegundos) {
+      if (duracion === numeroMinutos * 60) {
         ciclosActuales++;
         console.log(
           "ciclo actual: ",
@@ -78,18 +78,16 @@ function iniciarTemporizador() {
             ? numMinDescansoLargo * 60
             : numSegDescansoLargo;
         } else {
-          duracion = numMinDescanso ? numMinDescanso * 60 : numSegDescanso;
+          duracion = numMinDescanso * 60;
         }
 
         tiempoRestante = duracion;
         actualizarTemporizador();
       } else if (
         duracion === numMinDescanso * 60 ||
-        duracion === numSegDescanso ||
-        duracion === numMinDescansoLargo * 60 ||
-        duracion === numSegDescansoLargo
+        duracion === numMinDescansoLargo * 60
       ) {
-        duracion = numeroMinutos ? numeroMinutos * 60 : numeroSegundos;
+        duracion = numeroMinutos * 60;
         tiempoRestante = duracion;
         actualizarTemporizador();
       }
@@ -149,10 +147,11 @@ botonGuia.addEventListener("click", () => {
   cuadroGuia.classList.add("mostrar");
 });
 
-// cerrar cuadro de guia al dar click fuera de ella -- PENDIENTE
-// cuadroGuia.closest(".guia-uso.mostrar").addEventListener("click", () => {
-//   cuadroGuia.classList.remove("mostrar");
-// });
+cuadroGuia.addEventListener("click", (e) => {
+  if (e.target === cuadroGuia) {
+    cuadroGuia.classList.remove("mostrar");
+  }
+});
 
 botonCerrarGuia.addEventListener("click", () => {
   cuadroGuia.classList.remove("mostrar");
@@ -172,15 +171,39 @@ botonAplicar.addEventListener("click", () => {
     ? parseInt(inputDescansoLargo.value)
     : numMinDescansoLargo;
 
-  console.log(
-    numeroMinutos,
-    numMinDescanso,
-    ciclosNecesarios,
-    numMinDescansoLargo
-  );
+  if (numeroMinutos === numMinDescanso) {
+    inputDuracionDesc.classList.add("error");
+    mostrarError();
+    return;
+  }
+  if (numeroMinutos === numMinDescansoLargo) {
+    inputDescansoLargo.classList.add("error");
+    mostrarError();
+    return;
+  }
 
-  duracion = numeroMinutos * 60 || numeroSegundos;
+  duracion = numeroMinutos * 60;
   tiempoRestante = duracion;
+
+  inputDuracionDesc.classList.remove("error");
+  inputDescansoLargo.classList.remove("error");
+  mostrarInfo();
 
   actualizarTemporizador();
 });
+
+function mostrarInfo() {
+  const modalInfo = document.querySelector(".info");
+  modalInfo.classList.add("mostrar");
+  setTimeout(() => {
+    modalInfo.classList.remove("mostrar");
+  }, 2500);
+}
+
+function mostrarError() {
+  const modalError = document.querySelector(".error-modal");
+  modalError.classList.add("mostrar");
+  setTimeout(() => {
+    modalError.classList.remove("mostrar");
+  }, 2500);
+}

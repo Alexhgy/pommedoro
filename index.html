@@ -12,6 +12,15 @@
     <title>Pommedoro</title>
   </head>
   <body>
+    <div class="modal error-modal">
+      <span class="material-symbols-outlined"> cancel </span>
+      <p class="mensaje-error"></p>
+    </div>
+    <div class="modal info">
+      <span class="material-symbols-outlined"> done_outline </span>
+      <p class="mensaje-error"></p>
+    </div>
+
     <div class="guia-uso">
       <div class="contenedor-guia">
         <h3>Guía de uso</h3>
@@ -32,22 +41,24 @@
           </p>
 
           <ul>
-            <li><span>25 minutos</span> de actividad principal</li>
+            <li><span>25 minutos</span> de trabajo</li>
             <li><span>5 minutos</span> de descanso</li>
             <li><span>15 minutos</span> de descanso largo</li>
             <li><span>3 ciclos</span> antes de cada descanso largo</li>
           </ul>
 
           <p class="ultimo-parrafo">
-            Un ciclo se refiere a la finalizacion de una actividad principal.
-            Por defecto cada vez que complete 3 actividades principales su
+            Un ciclo se refiere a la finalizacion de un temporizador de trabajo.
+            Por defecto cada vez que complete 3 temporizadores de trabjo su
             siguiente descanso será de 15 minutos en vez de 5. <br /><br />En la
             sección de "Personalizar temporizador" puede cambiar estos valores
             por defecto. Para esto ingrese numeros enteros en los cuadros que lo
             requieran, si deja alguno en blanco se conservarán los valores por
             defecto. Una vez haya terminado de ingresar los valores deseados
             haga clic en el botón "Aplicar" para ver reflejadas sus
-            modificaciones.
+            modificaciones. El tiempo de trabajo debe ser diferente al de
+            descanso y descanso largo, de otro modo no se modificarán los
+            tiempos que ya estuvieran establecidos.
           </p>
         </div>
         <button class="cerrar-guia boton-primary">Cerrar</button>
@@ -56,7 +67,7 @@
 
     <header>
       <!-- <img src="" alt=""> -->
-      <h2><a href="#">Pommedoro</a></h2>
+      <h2><a href="/">Pommedoro</a></h2>
       <nav>
         <span class="material-symbols-outlined boton-guia" title="Guía de uso">
           help
@@ -95,13 +106,19 @@
       <section class="cambiar-temporizador">
         <h2>Personalizar temporizador</h2>
         <div class="inputs">
-          <label for="inputMinutos"> </label>
-          <input type="number" id="inputMinutos" placeholder="25 minutos" />
+          <label for="inputMinutos"> Establecer duración de trabajo</label>
+          <input
+            class="inputMinutos"
+            type="number"
+            id="inputMinutos"
+            placeholder="25 minutos"
+          />
 
           <label for="inputMinutosDescanso">
             Establecer duración de descanso
           </label>
           <input
+            class="inputMinutosDescanso"
             type="number"
             id="inputMinutosDescanso"
             placeholder="5 minutos"
@@ -114,6 +131,7 @@
             Establecer duración de descanso largo
           </label>
           <input
+            class="inputMinutosDescansoLargo"
             type="number"
             id="inputMinutosDescansoLargo"
             placeholder="15 minutos"
