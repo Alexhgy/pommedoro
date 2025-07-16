@@ -4,25 +4,32 @@
     box-sizing: border-box;
 }
 
+*::selection {
+    color: var(--white-shade);
+    background-color: var(--primary);
+}
+
 :root {
     --primary: #FF746C;
     --primary-dark: #FF2F23;
     --secondary: antiquewhite;
     --white-shade: whitesmoke;
     --shadow-dark: rgba(0,0,0,0.5);
+    --fontSize: 16px
 }
 
 html {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: var(--fontSize);
 }
+
 
 header {
     width: 100%;
     height: 45px;
     padding: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--primary);
     text-align: center;
@@ -34,10 +41,100 @@ header h2 {
     font-size: 1.5rem; /* 24px */
 }
 
+a {
+    text-decoration: none;
+    color: var(--white-shade);
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: end;
+    font-weight: 700;
+    font-size: 1.5rem; /* 24px */
+}
+
+header nav span {
+    cursor: pointer;
+}
+
+.guia-uso.mostrar {
+    display: block;
+}
+
+.guia-uso {
+    display: none;
+    position: absolute;
+    background-color: var(--shadow-dark);
+    min-width: 300px;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    text-align: left;
+    font-size: 1.3rem;   
+}
+
+.guia-uso .contenedor-guia {
+    top: 100vh;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px var(--shadow-dark);
+}
+
+.guia-uso h3 {
+    background-color: var(--primary);
+    color: var(--white-shade);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.guia-uso .guia-botones {
+    margin-bottom: 10px;
+}
+
+.guia-uso .fondo-cuadro {
+    background-color: var(--white-shade);
+    padding: 40px;
+}
+
+.guia-uso ul {
+    padding-left: 30px;
+}
+
+.guia-uso ul span{
+    font-weight: bold;
+}
+
+.guia-uso .cerrar-guia {
+    padding: 10px;
+    font-weight: bold;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+}
+
+.guia-uso .primer-parrafo {
+    margin-bottom: 10px;
+}
+
+.guia-uso .ultimo-parrafo {
+    margin-top: 10px;
+}
+
 main {
     background-color: var(--secondary);
     padding: 30px;
     height: 100vh;
+}
+
+main > section {
+    max-width: 800px;
+    margin: auto;
 }
 
 main .temporizador {
@@ -78,7 +175,7 @@ main .temporizador .acciones {
     width: 100%;
 }
 
-main .temporizador .acciones button{
+.boton-primary {
     width: 100%;
     min-height: 30px;
     background-color: var(--primary);
@@ -87,7 +184,9 @@ main .temporizador .acciones button{
     text-align: center;
     cursor: pointer;
     transition: all ease 0.2s;
+}
 
+main .temporizador .acciones button{
     &:first-child {
          border-bottom-left-radius: 10px; 
          border-right: 1px solid var(--white-shade);
@@ -114,5 +213,56 @@ main .temporizador .acciones button span {
 @keyframes blink {
     50% {
         opacity: 0.5;
+    }
+}
+
+.cambiar-temporizador {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.cambiar-temporizador h2 {
+    text-align: center;
+    background: var(--primary);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: var(--white-shade);
+    padding: 5px;
+    font-size: 1.5rem;
+}
+
+.cambiar-temporizador .inputs{
+    background-color: var(--white-shade);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.cambiar-temporizador input {
+    margin: 5px 0 20px 0;
+    border: none;
+    border-radius: 5px;
+    min-height: 30px;
+    text-align: center;
+    &:focus {
+        outline: none;
+        border: 2px solid var(--primary-dark);
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.cambiar-temporizador .confirmar-cambios {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    &:hover {
+        background-color: var(--primary-dark);
+    }
+}
+
+@media screen and (max-width: 500px){
+    html {
+        font-size: 0.8rem; /* 12.8px */
     }
 }

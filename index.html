@@ -12,34 +12,119 @@
     <title>Pommedoro</title>
   </head>
   <body>
+    <div class="guia-uso">
+      <div class="contenedor-guia">
+        <h3>Guía de uso</h3>
+        <div class="fondo-cuadro">
+          <div class="guia-botones">
+            <span class="material-symbols-outlined"> timer_play </span>
+            <span>: Iniciar temporizador</span>
+            <br />
+            <span class="material-symbols-outlined"> timer_pause </span>
+            <span>: Pausar temporizador</span>
+            <br />
+            <span class="material-symbols-outlined"> stop_circle </span>
+            <span>: Detener/Reiniciar temporizador</span>
+          </div>
+
+          <p class="primer-parrafo">
+            El temporizador tiene unos valores por defecto de:
+          </p>
+
+          <ul>
+            <li><span>25 minutos</span> de actividad principal</li>
+            <li><span>5 minutos</span> de descanso</li>
+            <li><span>15 minutos</span> de descanso largo</li>
+            <li><span>3 ciclos</span> antes de cada descanso largo</li>
+          </ul>
+
+          <p class="ultimo-parrafo">
+            Un ciclo se refiere a la finalizacion de una actividad principal.
+            Por defecto cada vez que complete 3 actividades principales su
+            siguiente descanso será de 15 minutos en vez de 5. <br />En la
+            sección de "Personalizar temporizador" puede cambiar estos valores
+            por defectos. Para esto ingrese numeros enteros en los cuadros que
+            lo requieran, si deja alguno en blanco se conservarán los valores
+            por defecto. Una vez haya terminado de ingresar los valores deseados
+            haga clic en el botón "Aplicar" para ver reflejadas sus
+            modificaciones.
+          </p>
+        </div>
+        <button class="cerrar-guia boton-primary">Cerrar</button>
+      </div>
+    </div>
+
     <header>
       <!-- <img src="" alt=""> -->
-      <h2>Pommedoro</h2>
-      <!-- <nav></nav> -->
+      <h2><a href="#">Pommedoro</a></h2>
+      <nav>
+        <span class="material-symbols-outlined boton-guia" title="Guía de uso">
+          help
+        </span>
+      </nav>
     </header>
     <main>
       <section class="temporizador">
         <div class="barra"></div>
         <div class="numeros">
           <div class="minutos">
-            <p>00</p>
+            <p>25</p>
           </div>
-          <hr class="divisor-numeros">
+          <hr class="divisor-numeros" />
           <div class="segundos">
-            <p>10</p>
+            <p>00</p>
           </div>
         </div>
         <div class="acciones">
-          <button class="iniciar" title="Iniciar temporizador">
+          <button class="iniciar boton-primary" title="Iniciar temporizador">
             <span class="material-symbols-outlined"> timer_play </span>
           </button>
-          <button class="pausar" title="Pausar temporizador">
+          <button class="pausar boton-primary" title="Pausar temporizador">
             <span class="material-symbols-outlined"> timer_pause </span>
           </button>
-          <button class="detener" title="Detener/Reiniciar temporizador">
+          <button
+            class="detener boton-primary"
+            title="Detener/Reiniciar temporizador"
+          >
             <span class="material-symbols-outlined"> stop_circle </span>
           </button>
         </div>
+      </section>
+
+      <section class="cambiar-temporizador">
+        <h2>Personalizar temporizador</h2>
+        <div class="inputs">
+          <label for="inputMinutos">
+            Establecer duración del temporizador
+          </label>
+          <input type="number" id="inputMinutos" placeholder="25 minutos" />
+
+          <label for="inputMinutosDescanso">
+            Establecer duración de descanso
+          </label>
+          <input
+            type="number"
+            id="inputMinutosDescanso"
+            placeholder="5 minutos"
+          />
+
+          <label for="inputMinutosDescansoLargo"> Establecer ciclos </label>
+          <input
+            type="number"
+            id="inputMinutosDescansoLargo"
+            placeholder="3 ciclos"
+          />
+
+          <label for="inputMinutosDescansoLargo">
+            Establecer duración de descanso largo
+          </label>
+          <input
+            type="number"
+            id="inputMinutosDescansoLargo"
+            placeholder="15 minutos"
+          />
+        </div>
+        <button class="confirmar-cambios boton-primary">Aplicar</button>
       </section>
     </main>
   </body>
