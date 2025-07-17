@@ -1,5 +1,8 @@
-// botones temporizador
+// elementos temporizador
 const barra = document.querySelector(".barra");
+const tempMsj = document.querySelector(".temp-msj-valor");
+const cicloMsj = document.querySelector(".ciclo-msj-valor");
+const ciclosTMsj = document.querySelector(".ciclosT-msj-valor");
 const elementoMinutos = document.querySelector(".minutos");
 const elementoSegundos = document.querySelector(".segundos");
 // elementos guia
@@ -24,6 +27,11 @@ const botonCerrarGuia = document.querySelector(".cerrar-guia");
 // botones modificar
 const botonAplicar = document.querySelector(".confirmar-cambios");
 
+// timbre-notificacion
+const timbreNotificacion = new Audio(
+  "./multimedia/audio/notificacion-pommedoro.mp3"
+);
+
 let numeroMinutos = 25; // 25
 let numeroSegundos = 0; // dev
 
@@ -39,6 +47,7 @@ let numMinDescansoLargo = 15; // 15
 
 let ciclosNecesarios = 3;
 let ciclosActuales = 0;
+let ciclosTotales = 0;
 
 duracion = numeroMinutos * 60 || numeroSegundos;
 tiempoRestante = duracion;
@@ -64,21 +73,22 @@ function iniciarTemporizador() {
   intervalo = setInterval(() => {
     if (tiempoRestante <= 0) {
       if (duracion === numeroMinutos * 60) {
+        timbreNotificacion.play();
         ciclosActuales++;
-        console.log(
-          "ciclo actual: ",
-          ciclosActuales,
-          " ciclos necesarios: ",
-          ciclosNecesarios
-        );
+        ciclosTotales++;
+        tempMsj.innerText = "trabajo";
+        cicloMsj.innerText = ciclosActuales;
+        ciclosTMsj.innerText = ciclosTotales;
 
         if (ciclosActuales === ciclosNecesarios) {
           ciclosActuales = 0;
+          tempMsj.innerText = "descanso largo";
           duracion = numMinDescansoLargo
             ? numMinDescansoLargo * 60
             : numSegDescansoLargo;
         } else {
           duracion = numMinDescanso * 60;
+          tempMsj.innerText = "descanso";
         }
 
         tiempoRestante = duracion;
@@ -87,6 +97,8 @@ function iniciarTemporizador() {
         duracion === numMinDescanso * 60 ||
         duracion === numMinDescansoLargo * 60
       ) {
+        timbreNotificacion.play();
+        tempMsj.innerText = "trabajo";
         duracion = numeroMinutos * 60;
         tiempoRestante = duracion;
         actualizarTemporizador();

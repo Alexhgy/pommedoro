@@ -190,7 +190,6 @@ main .temporizador .numeros {
     grid-template-rows: 1fr auto;
     justify-content: center;
     align-items: center;
-    padding: 0 0 10px 0;
 }
 
 main .temporizador .numeros .minutos {
@@ -203,6 +202,46 @@ main .temporizador .numeros .segundos {
 
 main .temporizador .numeros .divisor-numeros {
     color: rgba(0,0,0,0.3)
+}
+
+.mensaje {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: var(--primary);
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.mensaje .temp-msj {
+    place-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.mensaje .temp-msj-valor {
+    font-weight: normal;
+}
+
+.mensaje .ciclo-msj {
+    place-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.mensaje .ciclo-msj-valor {
+    font-weight: normal;
+}
+
+.mensaje .ciclosT-msj {
+    place-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.mensaje .ciclosT-msj-valor {
+    font-weight: normal;
 }
 
 main .temporizador .acciones {
@@ -324,8 +363,20 @@ main .temporizador .acciones button span {
     display: none;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 600px){
     html {
         font-size: 0.8rem; /* 12.8px */
+    }
+}
+
+@media screen and (max-width: 800px){
+    .mensaje {
+        height: auto;
+        margin-bottom: 10px;
+        flex-direction: column;
+    }
+
+    .mensaje p {
+        margin-top: 10px;
     }
 }
