@@ -60,7 +60,7 @@ header nav {
     align-items: center;
     justify-self: end;
     font-weight: 700;
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.5rem; 
 }
 
 header nav span {
@@ -92,7 +92,7 @@ header nav span {
 .guia-uso.mostrar {
   opacity: 1;
   visibility: visible;
-  height: 100%; /* altura máxima esperada */
+  height: 100%; 
   overflow: hidden;
 }
 
